@@ -68,7 +68,7 @@ in the `requirements.txt`.
 Since the weights will be downloaded automatically all that is needed to anonymize images is to run
 
 ```bash
-PYTHONPATH=$PYTHONPATH:. python anonymizer/bin/anonymize.py --input /path/to/input_folder --image-output /path/to/output_folder --weights /path/to/store/weights
+python main.py(or anonymizer.py) --input /path/to/input_folder --image-output /path/to/output_folder --weights /path/to/store/weights
 ```
 
 from the top folder of this repository. This will save both anonymized images and detection results as json-files to
@@ -80,7 +80,7 @@ In case you do not want to save the detections to json, add the parameter `no-wr
 Example:
 
 ```bash
-PYTHONPATH=$PYTHONPATH:. python anonymizer/bin/anonymize.py --input /path/to/input_folder --image-output /path/to/output_folder --weights /path/to/store/weights --no-write-detections
+python main.py --input /path/to/input_folder --image-output /path/to/output_folder --weights /path/to/store/weights --no-write-detections
 ```
 
 Detection threshold for faces and license plates can be passed as additional parameters.
