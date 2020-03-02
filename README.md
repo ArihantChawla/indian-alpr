@@ -87,14 +87,14 @@ Detection threshold for faces and license plates can be passed as additional par
 Both are floats in [0.001, 1.0]. Example:
 
 ```bash
-PYTHONPATH=$PYTHONPATH:. python anonymizer/bin/anonymize.py --input /path/to/input_folder --image-output /path/to/output_folder --weights /path/to/store/weights --face-threshold=0.1 --plate-threshold=0.9
+python main.py --input /path/to/input_folder --image-output /path/to/output_folder --weights /path/to/store/weights --face-threshold=0.1 --plate-threshold=0.9
 ```
 
 By default only `*.jpg` and `*.png` files are anonymized. To for instance only anonymize jpgs and tiffs, 
 the parameter `image-extensions` can be used. Example:
 
 ```bash
-PYTHONPATH=$PYTHONPATH:. python anonymizer/bin/anonymize.py --input /path/to/input_folder --image-output /path/to/output_folder --weights /path/to/store/weights --image-extensions=jpg,tiff
+python main.py --input /path/to/input_folder --image-output /path/to/output_folder --weights /path/to/store/weights --image-extensions=jpg,tiff
 ```
 
 The parameters for the blurring can be changed as well. For this the parameter `obfuscation-kernel` is used.
@@ -103,7 +103,7 @@ of another kernel that is used to make the transition between blurred and non-bl
 Example usage:
 
 ```bash
-PYTHONPATH=$PYTHONPATH:. python anonymizer/bin/anonymize.py --input /path/to/input_folder --image-output /path/to/output_folder --weights /path/to/store/weights --obfuscation-kernel="65,3,19"
+python main.py --input /path/to/input_folder --image-output /path/to/output_folder --weights /path/to/store/weights --obfuscation-kernel="65,3,19"
 ```
 
 ## Attributions
