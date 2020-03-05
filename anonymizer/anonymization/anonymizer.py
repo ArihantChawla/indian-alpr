@@ -17,7 +17,7 @@ def save_np_image(image, image_path):
     pil_image.save(image_path)
 
 
-def save_detections(detections, detections_path):
+def save_detections(detections, detections_path, input_path):
     json_output = []
     for box in detections:
         json_output.append({
@@ -26,7 +26,8 @@ def save_detections(detections, detections_path):
             'y_max': box.y_max,
             'x_max': box.x_max,
             'score': box.score,
-            'kind': box.kind
+            'kind': box.kind,
+            'path': input_path
         })
     with open(detections_path, 'w') as output_file:
         json.dump(json_output, output_file, indent=2)
@@ -68,4 +69,5 @@ class Anonymizer:
             anonymized_image, detections = self.anonymize_image(image=image, detection_thresholds=detection_thresholds)
             save_np_image(image=anonymized_image, image_path=str(output_image_path))
             if write_json:
-                save_detections(detections=detections, detections_path=str(output_detections_path))
+                save_detections(detections=detections, detections_path=str(output_detections_path), input_path=str(input_image_path))
+

@@ -51,7 +51,7 @@ def parse_args():
     parser.add_argument('--write-detections', dest='write_detections', action='store_true')
     parser.add_argument('--no-write-detections', dest='write_detections', action='store_false')
     parser.set_defaults(write_detections=True)
-    parser.add_argument('--obfuscation-kernel', required=False, default='21,2,9',
+    parser.add_argument('--obfuscation-kernel', required=False, default='21,1,9',
                         metavar='kernel_size,sigma,box_kernel_size',
                         help='This parameter is used to change the way the blurring is done. '
                              'For blurring a gaussian kernel is used. The default size of the kernel is 21 pixels '
@@ -91,10 +91,11 @@ def main(input_path, image_output_path, weights_path, image_extensions, face_thr
         'plate': plate_threshold
     }
     anonymizer = Anonymizer(obfuscator=obfuscator, detectors=detectors)
+    ####
     anonymizer.anonymize_images(input_path=input_path, output_path=image_output_path,
                                 detection_thresholds=detection_thresholds, file_types=image_extensions.split(','),
                                 write_json=write_json)
-
+    ####
 
 if __name__ == '__main__':
     args = parse_args()
