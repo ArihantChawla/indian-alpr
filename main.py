@@ -20,6 +20,7 @@ import argparse
 from anonymizer.anonymization import Anonymizer
 from anonymizer.detection import Detector, download_weights, get_weights_path
 from anonymizer.obfuscation import Obfuscator
+from anonymizer.cropping import Cropper
 
 
 def parse_args():
@@ -90,11 +91,17 @@ def main(input_path, image_output_path, weights_path, image_extensions, face_thr
         'face': face_threshold,
         'plate': plate_threshold
     }
+    
     anonymizer = Anonymizer(obfuscator=obfuscator, detectors=detectors)
-    ####
     anonymizer.anonymize_images(input_path=input_path, output_path=image_output_path,
                                 detection_thresholds=detection_thresholds, file_types=image_extensions.split(','),
                                 write_json=write_json)
+    
+    ####
+    
+    cropper = Cropper(output_path=image_output_path)
+    cropper.placeholder()
+
     ####
 
 if __name__ == '__main__':
