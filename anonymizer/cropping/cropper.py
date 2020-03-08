@@ -57,6 +57,6 @@ class Cropper:
 			fileBox = extractBox(fileData)
 			crop(fileBox,file,imagejsondict)
 		
-		with open('cropped/output.json', 'w') as output_file:
+		with open('finaloutput.json', 'w') as output_file:
 			json.dump(imagejsondict, output_file, indent=2)
 
