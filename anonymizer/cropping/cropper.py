@@ -25,7 +25,7 @@ def extractBox(data):
 	image_path = data[0]['path']
 	return [image_path, [xmin, xmax, ymin, ymax]]
 	
-def crop(box,filepath):
+def crop(box,filepath,imagejsondict):
 	image_path = box[0]
 	xmin = box[1][0]
 	xmax = box[1][1]
@@ -38,7 +38,8 @@ def crop(box,filepath):
 	cropped_image = image.crop((xmin,ymin,xmax,ymax)).convert('L')
 	cropped_image_path = "cropped/" + str(file_name) + "." + extension
 	cropped_image.save(cropped_image_path)
-	print(file_name + "\n" + pytesseract.image_to_string(cropped_image_path))
+	imagejsondict[file_name] = pytesseract.image_to_string(cropped_image_path)
+
 
 
 class Cropper:
@@ -47,11 +48,15 @@ class Cropper:
 		
 	def placeholder(self):
 		list = listJson(self.output_path)
+		imagejsondict = {}
+		
 		for file in list:
 			fileData = openJson(file)
 			if not fileData:
 				continue	
 			fileBox = extractBox(fileData)
-			crop(fileBox,file)
-
+			crop(fileBox,file,imagejsondict)
+		
+		with open('cropped/output.json', 'w') as output_file:
+			json.dump(imagejsondict, output_file, indent=2)
 
